@@ -1,51 +1,41 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
+
+type figuras2D interface {
+	area() float64
+}
+
+type cuadro struct {
+	base float64
+}
+
+type rectangulo struct {
+	width  float64
+	height float64
+}
+
+func (s cuadro) area() float64 {
+	return s.base * s.base
+}
+
+func (r rectangulo) area() float64 {
+	return r.width * r.height
+}
+
+func calculate(f figuras2D) {
+	fmt.Println("Area", f.area())
+}
 
 func main() {
-	// n := rand.Intn(10)
-	// fmt.Println(n)
-	// if n == 0 {
-	// 	fmt.Println("Muy bajo", n)
-	// } else if n == 5 {
-	// 	fmt.Println("Muy alto", n)
-	// } else {
-	// 	fmt.Println("Ok", n)
-	// }
+	myCuadro := cuadro{base: 2.0}
+	myRect := rectangulo{height: 3.4, width: 2.1}
 
-	// for i := 0; i < 10; i++ {
-	// 	fmt.Println(i)
-	// }
+	calculate(myCuadro)
+	calculate(myRect)
 
-	// i := 1
-	// for i < 1000 {
-	// 	i *= 2
-	// 	fmt.Println(i)
-	// }
-	// for i := 1; i <= 100; i++ {
-	// 	if i%3 == 0 && i%5 == 0 {
-	// 		fmt.Println("FizzBuzz")
-	// 		continue
-	// 	}
-	// 	if i%3 == 0 {
-	// 		fmt.Println("Fizz")
-	// 		continue
-	// 	}
-	// 	if i%5 == 0 {
-	// 		fmt.Println("Buzz")
-	// 		continue
-	// 	}
-	// 	fmt.Println(i)
-	// }
-	evenValues := []int{2, 4, 6, 8, 12, 14, 16, 20, 24, 28}
-	for _, v := range evenValues {
-		fmt.Println(v)
-	}
+	// Lista de interface
+	myInterface := []interface{}{"Hola", 12, 4.90}
+	fmt.Println(myInterface...)
 
-	uniqueValues := map[string]bool{"Fred": true, "Juan": false, "Paco": true}
-	for k := range uniqueValues {
-		fmt.Println(k)
-	}
 }
